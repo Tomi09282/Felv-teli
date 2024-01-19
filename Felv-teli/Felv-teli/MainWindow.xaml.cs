@@ -24,5 +24,13 @@ namespace Felv_teli
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //figyeljetek mar ki volt ez a bunos? aki ezt idedobta az jelentkezzen mer a szajat szanaszet szakitom.
+            //nezzetek meg az egesz szunyoghalo tiszta toas takaritani kell meg lett dobalva a terasz az utalok lesz**jak a f***t
+
+            
+        }
     }
 }

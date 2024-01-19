@@ -34,8 +34,15 @@ namespace felveteli
         {
             NewStudent ns = new NewStudent();
             ns.ShowDialog();
+            try
+            {
             Diak NewStudent = new Diak(ns.txtOM.Text, ns.txtNev.Text, ns.txtEmail.Text, DateTime.Parse(ns.txtSzul.Text), ns.txtCim.Text, int.Parse(ns.txtMatek.Text), int.Parse(ns.txtMagyar.Text));
             Adatok.Add(NewStudent);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Valamelyik adat hibásan került átadásra.");
+            }
         }
 
         private void btnTorles_Click(object sender, RoutedEventArgs e)

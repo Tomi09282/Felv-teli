@@ -34,7 +34,7 @@
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
-        
+
         <Style TargetType="{x:Type DataGridCell}">
             <Setter Property="Background" Value="#444444"/>
             <Setter Property="Foreground" Value="White"/>
@@ -68,10 +68,10 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="btnUjdiak" Grid.Column="1" FontSize="32px" Content="Új Diák" Margin="15px" Click="btnUjdiak_Click"></Button>
-        <Button x:Name="btnTorles" Grid.Column="1" FontSize="32px" Content="Törlés" Grid.Row="1" Margin="15px" Click="btnTorles_Click"></Button>
-        <Button x:Name="btnImport" Grid.Column="1" FontSize="32px" Content="Import" Grid.Row="2" Margin="15px" Click="btnImport_Click"></Button>
-        <Button x:Name="btnExport" Grid.Column="1" FontSize="32px" Content="Export" Grid.Row="3" Margin="15px" Click="btnExport_Click"></Button>
+        <Button x:Name="btnUjdiak" Grid.Column="1" FontSize="32px" Content="Új Diák" Margin="15px" Click="btnUjdiak_Click" FontFamily="MV Boli" Cursor="Cross" IsCancel="True"></Button>
+        <Button x:Name="btnTorles" Grid.Column="1" FontSize="32px" Content="Törlés" Grid.Row="1" Margin="15px" Click="btnTorles_Click" FontFamily="MV Boli" Cursor="Cross" IsCancel="True"></Button>
+        <Button x:Name="btnImport" Grid.Column="1" FontSize="32px" Content="Import" Grid.Row="2" Margin="15px" Click="btnImport_Click" FontFamily="MV Boli" Cursor="Cross" IsCancel="True"></Button>
+        <Button x:Name="btnExport" Grid.Column="1" FontSize="32px" Content="Export" Grid.Row="3" Margin="15px" Click="btnExport_Click" FontFamily="MV Boli" Cursor="Cross" IsCancel="True"></Button>
         <DataGrid x:Name="dtgAdatok" Margin="10px" Grid.RowSpan="4"></DataGrid>
 
     </Grid>

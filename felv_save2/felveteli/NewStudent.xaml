@@ -6,6 +6,27 @@
         xmlns:local="clr-namespace:felveteli"
         mc:Ignorable="d"
         Title="NewStudent" Height="450" Width="330">
+
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#3d3d3d" />
+            <Setter Property="BorderBrush" Value="#3d3d3d" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#4169E1" />
+        </Style>
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="#212121" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="#ffffff" />
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="Foreground" Value="#ffffff" />
+            <Setter Property="BorderBrush" Value="#575757" />
+        </Style>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -26,7 +47,6 @@
             <ColumnDefinition Width="110"/>
         </Grid.ColumnDefinitions>
 
-
         <Label  Content="Név:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"/>
         <Label  Content="OM:" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"/>
         <Label  Content="Matek:" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"/>
@@ -44,8 +64,10 @@
         <TextBox x:Name="txtCim" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"  Width="100"/>
         <TextBox x:Name="txtEmail" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"  Width="100"/>
         <DatePicker x:Name="txtSzul" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"  Width="100"/>
-
         
-        <Button Content="Beküldés" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Width="100" Click="Button_Click"/>
+        <Button FontSize="14" Content="Beküldés" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Width="100" Click="Button_Click"></Button>
+
     </Grid>
+
+    
 </Window>

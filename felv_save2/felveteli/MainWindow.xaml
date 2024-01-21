@@ -43,6 +43,12 @@
             <Setter Property="Padding" Value="6"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="BorderBrush" Value="Gray"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <Style TargetType="{x:Type DataGridRow}">
@@ -51,6 +57,12 @@
             <Setter Property="BorderBrush" Value="#1E1E1E"/>
             <Setter Property="BorderThickness" Value="0,1,0,0"/>
             <Setter Property="Padding" Value="0,3"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="BorderBrush" Value="Gray"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
     </Window.Resources>

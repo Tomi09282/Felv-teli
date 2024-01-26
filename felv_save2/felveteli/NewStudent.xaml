@@ -11,6 +11,7 @@
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="#3d3d3d" />
             <Setter Property="BorderBrush" Value="#3d3d3d" />
+            <Setter Property="Foreground" Value="White"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="Background" Value="#4169E1" />

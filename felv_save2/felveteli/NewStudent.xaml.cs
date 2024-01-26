@@ -1,16 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace felveteli
 {
@@ -24,11 +13,13 @@ namespace felveteli
             InitializeComponent();
         }
 
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 // Ellenőrzi a txtNev.Text értékét
+                
                 if (!txtNev.Text.Contains(" "))
                 {
                     txtNev.Focus();
@@ -70,10 +61,10 @@ namespace felveteli
                     throw new Exception("A cím nem lehet üres");
                 }
                 // Ellenőrzi a txtEmail.Text értékét
-                if (!txtEmail.Text.Contains("@"))
+                if (!txtEmail.Text.Contains("@") || txtEmail.Text.Contains(" "))
                 {
                     txtEmail.Focus();
-                    throw new Exception("Az emailnek tartalmaznia kell '@'-t");
+                    throw new Exception("Az emailnek tartalmaznia kell '@'-t és nem tartalmazhat szóközt");
                 }
 
                 // Ellenőrzi a txtSzul.Text értékét
@@ -81,6 +72,20 @@ namespace felveteli
                 {
                     txtSzul.Focus();
                     throw new Exception("Érvénytelen dátumformátum a DatePicker-ben");
+                }
+
+
+                try
+                {
+                    string[] nev = txtNev.Text.Trim().Split(' ');
+                    if (!(nev[0].ToUpperInvariant()[0] == nev[0][0]) || !(nev[1].ToUpperInvariant()[1] == nev[1][1]))
+                    {
+                    throw new Exception("A név kezdőbetüinek nagynak kell lennie");
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("A név kezdőbetüinek nagynak kell lennie(1)");
                 }
 
 

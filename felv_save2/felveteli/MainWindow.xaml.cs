@@ -47,13 +47,27 @@ namespace felveteli
 
         private void btnTorles_Click(object sender, RoutedEventArgs e)
         {
-            if (dtgAdatok.SelectedIndex != -1)
+
+            if (dtgAdatok.Items.Count > 0)
             {
-            Adatok.Remove(Adatok[dtgAdatok.SelectedIndex]);
-            } else
-            {
-                MessageBox.Show("Válassz ki egy diákot.");
+                List<IFelvetelizo> selected = new List<IFelvetelizo>();
+
+                foreach (var item in dtgAdatok.SelectedItems)
+                {
+                    selected.Add((IFelvetelizo)item);
+                }
+                foreach (IFelvetelizo sItem in selected)
+                {
+                    Adatok.Remove(sItem);
+                } 
+
             }
+            else
+            {
+                MessageBox.Show("Jelölj ki valamit");
+
+            }
+
         }
 
         private void btnImport_Click(object sender, RoutedEventArgs e)
@@ -115,6 +129,37 @@ namespace felveteli
             sr.Close();
             }
 
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            NewStudent ns = new NewStudent();
+
+            if (dtgAdatok.SelectedItems.Count == 1)
+            {
+               
+                ns.txtNev.Text = Adatok[dtgAdatok.SelectedIndex].Neve;
+                ns.txtOM.Text = Adatok[dtgAdatok.SelectedIndex].OM_Azonosito;
+                ns.txtMatek.Text = Adatok[dtgAdatok.SelectedIndex].Matematika.ToString();
+                ns.txtMagyar.Text = Adatok[dtgAdatok.SelectedIndex].Magyar.ToString();
+                ns.txtCim.Text = Adatok[dtgAdatok.SelectedIndex].ErtesitesiCime;
+                ns.txtEmail.Text = Adatok[dtgAdatok.SelectedIndex].Email;
+                ns.txtSzul.Text = Adatok[dtgAdatok.SelectedIndex].SzuletesiDatum.ToString();
+                ns.ShowDialog();
+                try
+                {
+                    Diak valtoztatott = new Diak(ns.txtOM.Text, ns.txtNev.Text, ns.txtEmail.Text, DateTime.Parse(ns.txtSzul.Text), ns.txtCim.Text, int.Parse(ns.txtMatek.Text), int.Parse(ns.txtMagyar.Text));
+                    Adatok[dtgAdatok.SelectedIndex] = valtoztatott;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Valamelyik adat hibásan került átadásra.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("1 adatot válassz ki");
+            }
         }
     }
 }

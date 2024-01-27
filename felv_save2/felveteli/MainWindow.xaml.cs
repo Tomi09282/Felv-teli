@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,9 +13,13 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Text.Json;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
+using Newtonsoft.Json;
+using System.Net.NetworkInformation;
 
 namespace felveteli
 {
@@ -32,7 +37,8 @@ namespace felveteli
 
         private void btnUjdiak_Click(object sender, RoutedEventArgs e)
         {
-            NewStudent ns = new NewStudent();
+            Diak newStudent = new Diak();
+            NewStudent ns = new NewStudent(newStudent);
             ns.ShowDialog();
             try
             {
@@ -72,37 +78,55 @@ namespace felveteli
 
         private void btnImport_Click(object sender, RoutedEventArgs e)
         {
-
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Fájlbetöltés";
-            ofd.Filter = "Adattábla(*.csv)|*.csv";
+            ofd.Filter = "Adattábla(*.csv;*.json)|*.csv;*.json";
             if ((bool)ofd.ShowDialog())
             {
                 try
                 {
                     StreamReader sr = new StreamReader(ofd.FileName);
-                    sr.ReadLine(); // elso sor -
 
-                    if (MessageBox.Show("Felülirja?", "Felvétel", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    if (ofd.FileName.EndsWith(".csv", StringComparison.OrdinalIgnoreCase))
                     {
-                        Adatok.Clear();
+                        sr.ReadLine();
+
+                        if (MessageBox.Show("Felülirja?", "Felvétel", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                        {
+                            Adatok.Clear();
+                        }
+
+                        while (!sr.EndOfStream)
+                        {
+                            string[] adat = sr.ReadLine().Trim().Split(';');
+                            if (adat[5] == "NULL")
+                            {
+                                adat[5] = "0";
+                            }
+                            else if (adat[6] == "NULL")
+                            {
+                                adat[6] = "0";
+                            }
+                            Diak d = new Diak(adat[0], adat[1], adat[2], DateTime.Parse(adat[3]), adat[4], int.Parse(adat[5]), int.Parse(adat[6]));
+                            Adatok.Add(d);
+                        }
+                    }
+                    else if (ofd.FileName.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+                    {
+                        string jsonContent = sr.ReadToEnd();
+                        if (MessageBox.Show("Felülirja?", "Felvétel", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                        {
+                            Adatok.Clear();
+                        }
+
+                        List<Diak> diakList = JsonConvert.DeserializeObject<List<Diak>>(jsonContent);
+
+                        foreach (var diak in diakList)
+                        {
+                            Adatok.Add(diak);
+                        }
                     }
 
-
-                    while (!sr.EndOfStream)
-                    {
-                        string[] adat = sr.ReadLine().Trim().Split(';');
-                        if (adat[5] == "NULL")
-                        {
-                            adat[5] = "0";
-                        }
-                        else if (adat[6] == "NULL")
-                        {
-                            adat[6] = "0";
-                        }
-                        Diak d = new Diak(adat[0], adat[1], adat[2], DateTime.Parse(adat[3]), adat[4], int.Parse(adat[5]), int.Parse(adat[6]));
-                        Adatok.Add(d);
-                    }
                     sr.Close();
                 }
                 catch (Exception)
@@ -112,53 +136,65 @@ namespace felveteli
             }
         }
 
+
         private void btnExport_Click(object sender, RoutedEventArgs e)
         {
-
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Title = "Fájlmentés";
-            sfd.Filter = "Adattábla(*.csv)|*.csv";
+            sfd.Filter = "Adattábla CSV (*.csv)|*.csv|Adattábla JSON (*.json)|*.json";
 
             if ((bool)sfd.ShowDialog())
             {
-            StreamWriter sr = new StreamWriter(sfd.FileName);
-            foreach (Diak d in Adatok)
-            {
-                sr.WriteLine($"{d.OM_Azonosito};{d.Neve};{d.Email};{d.SzuletesiDatum};{d.ErtesitesiCime};{d.Matematika};{d.Magyar}");
-            }
-            sr.Close();
-            }
+                string fileName = sfd.FileName;
 
+                if (fileName.EndsWith(".csv"))
+                {
+                    ExportCsv(fileName);
+                }
+                else if (fileName.EndsWith(".json"))
+                {
+                    ExportJson(fileName);
+                }
+                else
+                {
+                    MessageBox.Show("Nem támogatott fájlformátum.");
+                }
+            }
+        }
+
+        private void ExportCsv(string fileName)
+        {
+            using (StreamWriter sr = new StreamWriter(fileName))
+            {
+                foreach (Diak d in Adatok)
+                {
+                    sr.WriteLine($"{d.OM_Azonosito};{d.Neve};{d.Email};{d.SzuletesiDatum};{d.ErtesitesiCime};{d.Matematika};{d.Magyar}");
+                }
+            }
+        }
+
+        private void ExportJson(string fileName)
+        {
+            using (StreamWriter sr = new StreamWriter(fileName))
+            {
+                string json = System.Text.Json.JsonSerializer.Serialize(Adatok, new JsonSerializerOptions { WriteIndented = true });
+                sr.Write(json);
+            }
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            NewStudent ns = new NewStudent();
-
-            if (dtgAdatok.SelectedItems.Count == 1)
+            if (dtgAdatok.SelectedItem != null)
             {
-               
-                ns.txtNev.Text = Adatok[dtgAdatok.SelectedIndex].Neve;
-                ns.txtOM.Text = Adatok[dtgAdatok.SelectedIndex].OM_Azonosito;
-                ns.txtMatek.Text = Adatok[dtgAdatok.SelectedIndex].Matematika.ToString();
-                ns.txtMagyar.Text = Adatok[dtgAdatok.SelectedIndex].Magyar.ToString();
-                ns.txtCim.Text = Adatok[dtgAdatok.SelectedIndex].ErtesitesiCime;
-                ns.txtEmail.Text = Adatok[dtgAdatok.SelectedIndex].Email;
-                ns.txtSzul.Text = Adatok[dtgAdatok.SelectedIndex].SzuletesiDatum.ToString();
+                Diak ud = (Diak)dtgAdatok.SelectedItem;
+                NewStudent ns = new NewStudent(ud, true);
                 ns.ShowDialog();
-                try
-                {
-                    Diak valtoztatott = new Diak(ns.txtOM.Text, ns.txtNev.Text, ns.txtEmail.Text, DateTime.Parse(ns.txtSzul.Text), ns.txtCim.Text, int.Parse(ns.txtMatek.Text), int.Parse(ns.txtMagyar.Text));
-                    Adatok[dtgAdatok.SelectedIndex] = valtoztatott;
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Valamelyik adat hibásan került átadásra.");
-                }
+                dtgAdatok.Items.Refresh();
+
             }
             else
             {
-                MessageBox.Show("1 adatot válassz ki");
+                MessageBox.Show("válassz ki egy sort");
             }
         }
     }

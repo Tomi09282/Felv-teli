@@ -18,6 +18,10 @@ namespace felveteli
         string lakcim;
         int matek, magyar;
 
+        public Diak()
+        {
+        }
+
         public Diak(string om_azonosito, string nev, string email, DateTime szuletesi_datum, string lakcim, int matek, int magyar)
         {
             this.om_azonosito = om_azonosito;

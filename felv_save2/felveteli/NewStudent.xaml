@@ -7,28 +7,28 @@
         mc:Ignorable="d"
         Title="NewStudent" Height="450" Width="330">
 
-    <Window.Resources>
-        <Style TargetType="TextBox">
-            <Setter Property="Background" Value="#3d3d3d" />
-            <Setter Property="BorderBrush" Value="#3d3d3d" />
-            <Setter Property="Foreground" Value="White"/>
-        </Style>
-        <Style TargetType="Button">
-            <Setter Property="Background" Value="#4169E1" />
-        </Style>
-        <Style TargetType="Grid">
-            <Setter Property="Background" Value="#212121" />
-        </Style>
-        <Style TargetType="Label">
-            <Setter Property="Foreground" Value="#ffffff" />
-        </Style>
-        <Style TargetType="DatePicker">
-            <Setter Property="Foreground" Value="#ffffff" />
-            <Setter Property="BorderBrush" Value="#575757" />
-        </Style>
-    </Window.Resources>
+    <Grid x:Name="mainGrid">
+        <Grid.Resources>
+            <Style TargetType="TextBox">
+                <Setter Property="Background" Value="#3d3d3d" />
+                <Setter Property="BorderBrush" Value="#3d3d3d" />
+                <Setter Property="Foreground" Value="White"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="#4169E1" />
+            </Style>
+            <Style TargetType="Grid">
+                <Setter Property="Background" Value="#212121" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="Foreground" Value="#ffffff" />
+            </Style>
+            <Style TargetType="DatePicker">
+                <Setter Property="Foreground" Value="#ffffff" />
+                <Setter Property="BorderBrush" Value="#575757" />
+            </Style>
+        </Grid.Resources>
 
-    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -39,7 +39,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -52,23 +51,20 @@
         <Label  Content="OM:" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" FontFamily="Bahnschrift"/>
         <Label  Content="Matek:" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" FontFamily="Bahnschrift"/>
         <Label  Content="Magyar:" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" FontFamily="Bahnschrift"/>
-        <Label  Content="Cim:" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" FontFamily="Bahnschrift"/>
+        <Label  Content="Cím:" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" FontFamily="Bahnschrift"/>
         <Label  Content="Email:" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" FontFamily="Bahnschrift"/>
         <Label  Content="Születési dátum:" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" FontFamily="Bahnschrift"/>
         <Label x:Name="lblResponse" Content="" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
 
+        <TextBox x:Name="txtNev" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Width="100" TabIndex="1"/>
+        <TextBox x:Name="txtOM" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"  Width="100" TabIndex="2"/>
+        <TextBox x:Name="txtMatek" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"  Width="100" TabIndex="3"/>
+        <TextBox x:Name="txtMagyar" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"  Width="100" TabIndex="4"/>
+        <TextBox x:Name="txtCim" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"  Width="100" TabIndex="5"/>
+        <TextBox x:Name="txtEmail" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"  Width="100" TabIndex="6"/>
+        <DatePicker x:Name="txtSzul" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"  Width="100" TabIndex="7"/>
 
-        <TextBox x:Name="txtNev" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Width="100"/>
-        <TextBox x:Name="txtOM" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"  Width="100"/>
-        <TextBox x:Name="txtMatek" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"  Width="100"/>
-        <TextBox x:Name="txtMagyar" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"  Width="100"/>
-        <TextBox x:Name="txtCim" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"  Width="100"/>
-        <TextBox x:Name="txtEmail" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"  Width="100"/>
-        <DatePicker x:Name="txtSzul" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"  Width="100"/>
-
-        <Button FontSize="14" Content="Beküldés" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Width="100" Click="Button_Click" FontFamily="Arial Black" AutomationProperties.AcceleratorKey="Enter"/>
+        <Button FontSize="14" Content="Beküldés" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Width="100" Click="Button_Click" FontFamily="Arial Black" AutomationProperties.AcceleratorKey="Enter" TabIndex="8"/>
 
     </Grid>
-
-
 </Window>

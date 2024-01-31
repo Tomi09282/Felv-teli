@@ -1,0 +1,17 @@
+#dataDiv {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 80%;
+    align-self: center;
+
+}
+
+#tablazat {
+    margin: 25px;
+    border-radius: 5px;
+    border: 1px solid black;
+    text-align-last: center;
+}
+table, th, td {
+    border: 1px solid black;
+}

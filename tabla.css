@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-height: 300vh;
+    margin: 0;
+    background-color: #1a1a1a;
+    color: #cccccc;
+    overflow: hidden; /* Add this line to prevent scrolling on the body */
+    overflow-y: auto;
+    text-align: center;
+}
+
+.container {
+    overflow: auto; /* Add this line to enable scrolling within the container */
+    max-height: 60vh; /* Set a maximum height for the container */
+}
+
+input, button {
+    margin-top: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 75%;
+    margin-top: 20px;
+    background-color: rgb(64, 64, 64);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+th, td {
+    border: 1px solid #999999;
+    padding: 12px;
+    text-align: left;
+    color: #ffffff;
+}
+
+th {
+    cursor: pointer;
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+th:hover {
+    background-color: #686868;
+}
+
+tbody tr:hover {
+    background-color: #686868;
+}
+
+#logo {
+    margin-top: 20px; /* Adjust the margin based on your design preferences */
+    max-width: 30%; /* Ensure the logo doesn't exceed its container's width */
+  }

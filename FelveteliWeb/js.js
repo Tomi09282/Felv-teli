@@ -184,7 +184,7 @@ var adatok = [
 
   //alert(adatok[0].OM_Azonosito) Figyeljetek mar ki volt ez a bunos? aki ezt itt szetdobadobalta az jelentkezzen mert a szajat szanaszet szakit
 
-function Keres(){
+  function Keres() {
     var om = document.getElementById("omAzon").value;
     var tablazat = document.element
     
@@ -195,7 +195,15 @@ function Keres(){
     }
     htmlTabla += "</tr>";
     adatok.forEach(diak => {
-        if (diak.OM_Azonosito == om) {
+        if (!isNaN(om) && diak.OM_Azonosito.includes(om)) {
+            for (var i = 0; i < 1; i++) {
+                htmlTabla += "<tr>";
+                for (var key in adatok[i]) {
+                    htmlTabla += "<td>" + diak[key] + "</td>";
+                }
+                htmlTabla += "</tr>";
+            }
+        } else if (diak.OM_Azonosito == om) {
             for (var i = 0; i < 1; i++) {
                 htmlTabla += "<tr>";
                 for (var key in adatok[i]) {
@@ -207,7 +215,7 @@ function Keres(){
     });
     htmlTabla += "</table>";
     document.getElementById("dataDiv").innerHTML = htmlTabla;
-  }
+}
  
   function adatokTablazatba() {
     var htmlTabla = "<table id='tablazat'>";
@@ -227,9 +235,12 @@ function Keres(){
     document.getElementById("dataDiv").innerHTML = htmlTabla;
 }
 
-adatokTablazatba();
-
-  // ez mitccinnl?
-    //Ahaaaa
-
-  // ez keresi az elet ertelmet
+window.onload = function() {
+  adatokTablazatba();
+  
+  // Hozzáadunk egy eseményfigyelőt az input mezőhöz
+  var inputBox = document.getElementById("omAzon");
+  inputBox.addEventListener("input", function() {
+      Keres(); // Keresés automatikus kiváltása az input változásakor
+  });
+};

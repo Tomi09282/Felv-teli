@@ -185,8 +185,9 @@ var adatok = [
   var rendezesiSorrendek = {}; // Objektum a rendezési sorrendek tárolására minden oszlophoz
 
   // Függvény a tábla generálásához
-  function tablatGeneralo() {
-    var tabla = document.createElement('table');
+  function tablatGeneralo(adatok) {
+    // Táblaelem létrehozása vagy meglévő tábla lekérése
+    var tabla = document.querySelector('table') || document.createElement('table');
     tabla.innerHTML = '<thead><tr>' +
                       '<th onclick="tablaRendezese(0)">OM Azonosito</th>' +
                       '<th onclick="tablaRendezese(1)">Neve</th>' +
@@ -207,9 +208,15 @@ var adatok = [
         cella.textContent = diak[tulajdonsag];
       }
     });
-  
-    document.body.appendChild(tabla);
-  }
+
+    // Tábla cseréje vagy új hozzáadása a DOM-hoz
+    var regiTabela = document.querySelector('table');
+    if (regiTabela) {
+        regiTabela.parentNode.replaceChild(tabla, regiTabela);
+    } else {
+        document.body.appendChild(tabla);
+    }
+}
   
   // Függvény a tábla rendezéséhez
   function tablaRendezese(oszlopIndex) {
@@ -270,7 +277,18 @@ var adatok = [
     fejlecok[oszlopIndex].innerHTML += nyil;
   }
   
-  // Az oldal betöltésekor hívódik meg
-  window.onload = function() {
-    tablatGeneralo();
-  };
+  function filterStudents() {
+      var minMagyar = parseInt(document.getElementById("minMagyar").value) || 0;
+      var minMatek = parseInt(document.getElementById("minMatek").value) || 0;
+      
+      var filteredStudents = adatok.filter(function (diak) {
+          return diak.Magyar >= minMagyar && diak.Matematika >= minMatek;
+        });
+        
+        tablatGeneralo(filteredStudents);
+    }
+    
+    // Az oldal betöltésekor hívódik meg
+    window.onload = function () {
+        tablatGeneralo(adatok);
+    };

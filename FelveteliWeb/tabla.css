@@ -5,37 +5,37 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #1a1a1a; /* Darker background */
-    color: #cccccc; /* Light grey text color */
+    background-color: #1a1a1a; 
+    color: #cccccc;
   }
   
   table {
     border-collapse: collapse;
     width: 75%;
     margin-top: 20px;
-    background-color: rgb(64, 64, 64); /* Bright blue background */
+    background-color: rgb(64, 64, 64); 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px; /* Rounded corners for the table */
+    border-radius: 10px; 
   }
   
   th, td {
-    border: 1px solid #999999; /* Medium grey borders */
+    border: 1px solid #999999; 
     padding: 12px;
     text-align: left;
-    color: #ffffff; /* Dark grey text color */
+    color: #ffffff; 
   }
   
   th {
     cursor: pointer;
-    background-color: #1a1a1a; /* Lighter blue for header */
+    background-color: #1a1a1a; 
     color: #ffffff;
   }
   
   th:hover {
-    background-color: #686868; /* Darker blue on hover */
+    background-color: #686868; 
   }
   
   tbody tr:hover {
-    background-color: #686868; /* Darker blue on row hover */
+    background-color: #686868; 
   }
   

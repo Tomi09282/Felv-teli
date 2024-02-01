@@ -10,6 +10,7 @@ body {
     color: #cccccc;
     overflow: hidden; /* Add this line to prevent scrolling on the body */
     overflow-y: auto;
+    text-align: center;
 }
 
 .container {
@@ -50,3 +51,8 @@ th:hover {
 tbody tr:hover {
     background-color: #686868;
 }
+
+#logo {
+    margin-top: 20px; /* Adjust the margin based on your design preferences */
+    max-width: 30%; /* Ensure the logo doesn't exceed its container's width */
+  }

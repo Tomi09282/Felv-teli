@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OM azonosító és név megadása</title>
+    <link rel="stylesheet" href="ccss.css">
+    <script src="cjs.js" defer></script>
+    <script src="../adatok.js" defer></script>
+</head>
+<body>
+
+<h1>OM azonosító és név megadása</h1>
+
+<label for="keresOM">OM Azonosító keresése:</label>
+<input type="text" id="keresOM" oninput="kereses()" placeholder="Keresés az OM azonosító alapján">
+
+<br>
+
+<label for="keresNev">Név keresése:</label>
+<input type="text" id="keresNev" oninput="kereses()" placeholder="Keresés a név alapján">
+
+<br>
+
+<label for="tételek">Tételek száma: <span id="tetelekSzama">0</span></label>
+<label for="matekatlag">Matek átlag: <span id="matekatlagErtek">0.00</span></label>
+<label for="magyaratlag">Magyar átlag: <span id="magyaratlagErtek">0.00</span></label>
+<label for="osszatlag">Összesített pontok átlaga: <span id="osszatlagErtek">0.00</span></label>
+<br>
+
+<div id="adatok">
+
+</div>

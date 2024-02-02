@@ -1,3 +1,4 @@
+"use strict"
 var adatok = [
   {
     "OM_Azonosito": "78655218932",

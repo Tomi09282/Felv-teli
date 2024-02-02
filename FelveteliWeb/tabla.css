@@ -8,14 +8,14 @@ body {
     margin: 0;
     background-color: #1a1a1a;
     color: #cccccc;
-    overflow: hidden; /* Add this line to prevent scrolling on the body */
+    overflow: hidden;
     overflow-y: auto;
     text-align: center;
 }
 
 .container {
-    overflow: auto; /* Add this line to enable scrolling within the container */
-    max-height: 60vh; /* Set a maximum height for the container */
+    overflow: auto; 
+    max-height: 60vh;
 }
 
 input, button {
@@ -53,6 +53,6 @@ tbody tr:hover {
 }
 
 #logo {
-    margin-top: 20px; /* Adjust the margin based on your design preferences */
-    max-width: 30%; /* Ensure the logo doesn't exceed its container's width */
+    margin-top: 20px;
+    max-width: 30%;
   }

@@ -1,0 +1,1 @@
+szabo tamas + kricsfalusi david

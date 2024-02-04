@@ -20,6 +20,8 @@ using System.Windows.Shapes;
 using System.Xml;
 using Newtonsoft.Json;
 using System.Net.NetworkInformation;
+using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace felveteli
 {
@@ -42,14 +44,16 @@ namespace felveteli
             ns.ShowDialog();
             try
             {
-            Diak NewStudent = new Diak(ns.txtOM.Text, ns.txtNev.Text, ns.txtEmail.Text, DateTime.Parse(ns.txtSzul.Text), ns.txtCim.Text, int.Parse(ns.txtMatek.Text), int.Parse(ns.txtMagyar.Text));
-            Adatok.Add(NewStudent);
+                Diak NewStudent = new Diak(ns.txtOM.Text, ns.txtNev.Text, ns.txtEmail.Text, DateTime.Parse(ns.txtSzul.Text), ns.txtCim.Text, int.Parse(ns.txtMatek.Text), int.Parse(ns.txtMagyar.Text));
+                Adatok.Add(NewStudent);
             }
             catch (Exception)
             {
                 MessageBox.Show("Valamelyik adat hibásan került átadásra.");
             }
         }
+
+
 
         private void btnTorles_Click(object sender, RoutedEventArgs e)
         {
@@ -65,7 +69,7 @@ namespace felveteli
                 foreach (IFelvetelizo sItem in selected)
                 {
                     Adatok.Remove(sItem);
-                } 
+                }
 
             }
             else
@@ -195,6 +199,59 @@ namespace felveteli
             else
             {
                 MessageBox.Show("válassz ki egy sort");
+            }
+        }
+
+
+
+        private void btnImportToDB_Click(object sender, RoutedEventArgs e)
+        {
+            string connectionString = "Server=localhost;Database=felveteli;User ID=root;Password=;";
+
+            if (Adatok.Count > 0)
+            {
+                try
+                {
+                    using (MySqlConnection connection = new MySqlConnection(connectionString))
+                    {
+                        connection.Open();
+
+                        string deleteQuery = "DELETE FROM adatok";
+                        using (MySqlCommand deleteCommand = new MySqlCommand(deleteQuery, connection))
+                        {
+                            deleteCommand.ExecuteNonQuery();
+                        }
+
+                        foreach (Diak diak in Adatok)
+                        {
+                            string insertQuery = "INSERT INTO adatok (OM_Azonosito, Nev, Email, Szuletesi_Datum, Ertesitesi_cim, matek_eredmeny, magyar_eredmeny) " +
+                                                 "VALUES (@OM_Azonosito, @Neve, @Email, @SzuletesiDatum, @ErtesitesiCime, @Matematika, @Magyar)";
+
+                            using (MySqlCommand insertCommand = new MySqlCommand(insertQuery, connection))
+                            {
+                                insertCommand.Parameters.AddWithValue("@OM_Azonosito", diak.OM_Azonosito);
+                                insertCommand.Parameters.AddWithValue("@Neve", diak.Neve);
+                                insertCommand.Parameters.AddWithValue("@Email", diak.Email);
+                                insertCommand.Parameters.AddWithValue("@SzuletesiDatum", diak.SzuletesiDatum);
+                                insertCommand.Parameters.AddWithValue("@ErtesitesiCime", diak.ErtesitesiCime);
+                                insertCommand.Parameters.AddWithValue("@Matematika", diak.Matematika);
+                                insertCommand.Parameters.AddWithValue("@Magyar", diak.Magyar);
+
+                                insertCommand.ExecuteNonQuery();
+                            }
+                        }
+
+                        MessageBox.Show("Sikeres feltoltes adatbazisba.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Hiba: {ex.Message}");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nincs mit beimportalni");
             }
         }
     }

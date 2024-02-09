@@ -86,7 +86,7 @@
         <Button x:Name="btnImport" Grid.Column="1" FontSize="32px" Content="Import" Grid.Row="2" Margin="15px" Click="btnImport_Click" FontFamily="MV Boli" Cursor="Cross" IsCancel="True"></Button>
         <Button x:Name="btnExport" Grid.Column="1" FontSize="32px" Content="Export" Grid.Row="3" Margin="15px" Click="btnExport_Click" FontFamily="MV Boli" Cursor="Cross" IsCancel="True"></Button>
         <Button x:Name="btnEdit" Grid.Column="1" FontSize="32px" Content="Módosítás" Grid.Row="4" Margin="15px" FontFamily="MV Boli" Cursor="Cross" IsCancel="True" Click="btnEdit_Click"></Button>
-        <Button x:Name="btnImportToDB" Grid.Column="1" FontSize="32px" Content="Feltöltés adatbázisba" Grid.Row="4" Margin="15px" FontFamily="MV Boli" Cursor="Cross" IsCancel="True" Click="btnImportToDB_Click"></Button>
+        <Button x:Name="btnImportToDB" Grid.Column="1" FontSize="32px" Content="Feltöltés adatbázisba" Grid.Row="5" Margin="15px" FontFamily="MV Boli" Cursor="Cross" IsCancel="True" Click="btnImportToDB_Click"></Button>
         <DataGrid x:Name="dtgAdatok" Margin="10px" Grid.RowSpan="5"></DataGrid>
 
     </Grid>
